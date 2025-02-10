@@ -1,3 +1,6 @@
+![logo](https://github.com/user-attachments/assets/cfeed70e-7cd6-4bff-9116-0c55e23c653d)
+
+
 ## 🌟 Grief Prevention GUI: Revolutionize Your Survival Server! 🌟
 
 Enhance your Minecraft server with the **Grief Prevention GUI**, a comprehensive plugin that goes beyond a graphical interface to provide powerful tools like a claim user invite system, multi-economy support for claim block purchases, a fully customizable flag system, and a cutting-edge claim visualization system. Perfect for players and admins alike, this addon brings powerful tools to streamline gameplay and elevate your server’s security and customization.

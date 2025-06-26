@@ -1,3 +1,4 @@
+<img src='https://api.mcbanners.com/banner/saved/EYRfzXetZfvRpZ.png' alt='Banner' />
 ---
 icon: mushroom
 cover: .gitbook/assets/netherite banner.png

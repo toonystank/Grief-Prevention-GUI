@@ -22,3 +22,12 @@ This addon transforms the traditional command-based claim management into a user
 * **Manager Cooldown for Claim Settings**: Set cooldown periods for new managers before they can modify claim settings.​
 * **Multi-Economy Support**: Support for multiple economies when purchasing claim blocks.​
 * **Claim User Invite System**: An optional system to invite users to claims, enhancing trust management.
+
+## 📖 Getting Started 
+
+To begin using the Grief Prevention GUI Addon:
+
+1. **Installation**: Place the plugin JAR file into your server's `plugins` directory.​
+2. **Configuration**: Upon first run, the plugin will generate default configuration files. Customise these files (`config.yml`, `flagSettings.yml`, etc.) to suit your server's needs.​
+3. **GUI Access**: Players can access the GUI using the `/claim` command.​
+4. **Permissions**: Ensure appropriate permissions are set up for different user roles to control access to various features. 

@@ -1,23 +1,4 @@
 <img src='https://api.mcbanners.com/banner/saved/EYRfzXetZfvRpZ.png' alt='Banner' />
----
-icon: mushroom
-cover: .gitbook/assets/netherite banner.png
-coverY: -40.01052631578948
-layout:
-  cover:
-    visible: true
-    size: full
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
----
 
 # Welcome
 

@@ -1,4 +1,4 @@
-# Grief Prevention GUI Addon Plugin
+# Grief Prevention GUI Addon Plugin wiki
 
 ## 📚 Official Links
 [![Documentation](https://img.shields.io/badge/Documentation-GitBook-blue)](https://toonystank.gitbook.io/grief-prevention-gui-addon-wiki/)

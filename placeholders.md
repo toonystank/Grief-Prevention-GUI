@@ -4,98 +4,99 @@ icon: spell-check
 
 # Placeholders
 
-The following is a comprehensive list of placeholders provided by the GriefPrevention GUI Addon for use with PlaceholderAPI. These placeholders can be used in GUIs, messages, and other plugin integrations to display dynamic information about claims, players, and settings.
+Placeholders can be used with the prefix `%griefprevgui_<placeholder>%` or `%gpextension_<placeholder>%`.
 
-## Placeholder List
+## General
 
-* `%griefprevgui_isclaimed%`
-* `%griefprevgui_isclaimed_lookingat%`
-* `%griefprevgui_isclaimed_x_y_z%`
-* `%griefprevgui_claimedby%`
-* `%griefprevgui_claimedby_lookingat%`
-* `%griefprevgui_claimedby_x_y_z%`
-* `%griefprevgui_isenabled_economy%`
-* `%griefprevgui_isenabled_list%`
-* `%griefprevgui_isenabled_teleport%`
-* `%griefprevgui_isenabled_warp%`
-* `%griefprevgui_warpsize%`
-* `%griefprevgui_price_purchase_amount%`
-* `%griefprevgui_price_sell_amount%`
-* `%griefprevgui_prefix%`
-* `%griefprevgui_title%`
-* `%griefprevgui_flighttime%`
-* `%griefprevgui_isholding_createwand%`
-* `%griefprevgui_otherplayer_uuid_playername%`
-* `%griefprevgui_otherplayer_displayname_playername%`
-* `%griefprevgui_online_player%`
-* `%griefprevgui_online_playeruuid%`
-* `%griefprevgui_online_online%`
-* `%griefprevgui_areaprice_area%`
-* `%griefprevgui_claimblocks%`
-* `%griefprevgui_remainingblocks%`
-* `%griefprevgui_claimcount%`
-* `%griefprevgui_trustcount%`
-* `%griefprevgui_managercount%`
-* `%griefprevgui_getclaimid_index%`
-* `%griefprevgui_standing_id%`
-* `%griefprevgui_standing_owner%`
-* `%griefprevgui_standing_size%`
-* `%griefprevgui_standing_permission%`
-* `%griefprevgui_standing_flag_list%`
-* `%griefprevgui_standing_flag_isactive_flagname%`
-* `%griefprevgui_getbyid_isinvited_{claimid}%`
-* `%griefprevgui_getbyid_invitor_{claimid}%`
-* `%griefprevgui_getbyid_size_{claimid}%`
-* `%griefprevgui_getbyid_isexist_{claimid}%`
-* `%griefprevgui_getbyid_trustlist_{claimid}_{permission}%`
-* `%griefprevgui_getbyid_expiretime_{claimid}%`
-* `%griefprevgui_getbyid_issubdiv_{claimid}%`
-* `%griefprevgui_getbyid_subsize_{claimid}%`
-* `%griefprevgui_getbyid_blocked_size_{claimid}%`
-* `%griefprevgui_getbyid_blocked_players_{claimid}%`
-* `%griefprevgui_getbyid_blocked_contains_{claimid}_{player}%`
-* `%griefprevgui_getbyid_blocked_get_{claimid}_{index}%`
-* `%griefprevgui_getbyid_owner_{claimid}%`
-* `%griefprevgui_getbyid_location_{claimid}%`
-* `%griefprevgui_getbyid_trustsize_{claimid}%`
-* `%griefprevgui_getbyid_istrusted_{claimid}%`
-* `%griefprevgui_getbyid_trust_{claimid}_{index}%`
-* `%griefprevgui_getbyid_trustuuid_{claimid}_{index}%`
-* `%griefprevgui_getbyid_permission_{claimid}_{uuid}%`
-* `%griefprevgui_getbyid_permissionname_{claimid}_{playername}%`
-* `%griefprevgui_getbyid_isbuild_{claimid}%`
-* `%griefprevgui_getbyid_editaccess_{claimid}_{uuid}%`
-* `%griefprevgui_getbyid_canremovepermission_{claimid}_{uuid}%`
-* `%griefprevgui_getbyid_biome_{claimid}%`
-* `%griefprevgui_getbyid_teleportlocation_{claimid}%`
-* `%griefprevgui_getbyid_centerblock_{claimid}%`
-* `%griefprevgui_getbyid_claimname_{claimid}%`
-* `%griefprevgui_getbyid_claimicon_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_whitelistsize_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_whitelistedplayers_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_blocklistsize_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_blacklistedplayers_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_isblockedforeveryone_{claimid}%`
-* `%griefprevgui_getbyid_claimentry_isblacklisted_{claimid}_{player}%`
-* `%griefprevgui_getbyid_claimentry_iswhitelisted_{claimid}_{player}%`
-* `%griefprevgui_getbyid_nomobspawnstype_allowedspawnreasons_{claimid}%`
-* `%griefprevgui_getbyid_nomobspawnstype_disallowedentities_{claimid}%`
-* `%griefprevgui_getbyid_nomobspawnstype_disallowedentity_{claimid}_{entity}%`
-* `%griefprevgui_getbyid_nomobspawnstype_allowedspawnreason_{claimid}_{reason}%`
-* `%griefprevgui_getbyid_claimdescription_{claimid}%`
-* `%griefprevgui_getbyid_isin_{claimid}%`
-* `%griefprevgui_getbyid_warplocation_{claimid}%`
-* `%griefprevgui_getbyid_centerblocklist_{index}%`
-* `%griefprevgui_getbyid_flags_isactive_{flagname}_{claimid}%`
-* `%griefprevgui_getbyid_flags_isactiveformatted_{flagname}_{claimid}%`
-* `%griefprevgui_getbyid_flags_parma_{flagname}_{claimid}%`
-* `%griefprevgui_getbyid_flags_listflags_{flagname}%`
+- `%griefprevgui_isclaimed [lookingat|x_y_z]%` - Returns true if the location is claimed.
+- `%griefprevgui_claimedby [lookingat|x_y_z]%` - Returns the owner of the claim at the location.
+- `%griefprevgui_isenabled [economy|list|teleport|warp]%` - Checks if a feature is enabled.
+- `%griefprevgui_warpsize%` - Returns the number of claims with warps.
+- `%griefprevgui_price [purchase|sell] <amount>%` - Calculates block price.
+- `%griefprevgui_prefix%` - Returns the plugin prefix.
+- `%griefprevgui_title%` - Returns the plugin title.
+- `%griefprevgui_flighttime%` - Returns the player's flight time.
+- `%griefprevgui_isholding createwand%` - Returns true if holding the claim creation tool.
+- `%griefprevgui_online [player|playeruuid|online]%` - Returns player name, UUID, or online count.
+- `%griefprevgui_areaprice <area>%` - Returns the price for a specific area size.
 
-## Notes
+## Player Specific
 
-* **Usage**: Use these placeholders in GUI configurations (e.g., `menu_title`, `display_name`, `lore`), messages, or other PlaceholderAPI-compatible plugins.
-* **Dynamic Parameters**: Placeholders with `{claimid}`, `{player}`, `{uuid}`, `{index}`, `{flagname}`, `{permission}`, `{entity}`, or `{reason}` require specific values (e.g., a claim ID, player name, or flag name like `ChangeBiome`).
-* **Dependencies**: Some placeholders (e.g., those using `{player}`) require the PlaceholderAPI `Player` expansion. Install it via `/papi ecloud download Player` if needed.
-* **Testing**: Test placeholders in your server to ensure they return expected values, especially for dynamic parameters like `{claimid}` or `{flagname}`.
+- `%griefprevgui_claimblocks [formatted]%` - Returns player's available claim blocks.
+- `%griefprevgui_remainingblocks [formatted]%` - Returns player's remaining claim blocks.
+- `%griefprevgui_claimcount%` - Returns number of claims owned.
+- `%griefprevgui_trustcount%` - Returns number of claims trusted in.
+- `%griefprevgui_managercount%` - Returns number of claims with manager permissions.
+- `%griefprevgui_otherplayer_uuid_<player>%` - Returns UUID of another player.
+- `%griefprevgui_otherplayer_displayname_<player>%` - Returns display name of another player.
 
-For further assistance, refer to the GriefPrevention GUI Addon documentation or contact the server admin.
+## Standing In Claim
+
+Placeholders relative to the claim the player is currently standing in.
+
+- `%griefprevgui_standing_id%` - Claim ID.
+- `%griefprevgui_standing_owner%` - Claim Owner.
+- `%griefprevgui_standing_size%` - Claim Area.
+- `%griefprevgui_standing_permission%` - Player's permission level.
+- `%griefprevgui_standing_flag_list%` - List of active flags.
+- `%griefprevgui_standing_flag_isactive_<flagName>%` - Check if a flag is active.
+
+## By Claim ID
+
+Prefix: `%griefprevgui_getbyid_<subcommand>_<claimID>%` (or `here` for current location)
+
+- `isinvited`: Is the player invited?
+- `invitor`: Name of the invitor.
+- `size`: Claim area.
+- `isexist`: Does the claim exist?
+- `expiretime`: Expiration date.
+- `issubdiv`: Is it a subdivision?
+- `subsize`: Number of subdivisions.
+- `owner`: Claim owner name.
+- `location`: Formatted center location.
+- `trustsize`: Number of trusted players.
+- `istrusted`: Is the player trusted?
+- `trust <index>`: Name of trusted player at index.
+- `trustuuid <index>`: UUID of trusted player at index.
+- `permission <UUID>`: Permission level of specific UUID.
+- `permissionname <player>`: Permission level of specific player.
+- `isbuild`: Does player have build trust?
+- `editaccess`: Does player have edit access?
+- `canremovepermission <UUID>`: Can player remove permission of UUID?
+- `biome`: Center biome.
+- `teleportlocation`: Teleport location.
+- `centerblock`: Center block type.
+- `claimname`: Claim name.
+- `claimicon`: Claim icon type.
+- `isin`: Is player inside?
+- `warplocation`: Warp location.
+- `trustlist <separator>`: Formatted trust list.
+
+### Flag Info by ID
+- `flags_isactive_<flagName>`
+- `flags_isactiveformatted_<flagName>`
+- `flags_parma_<flagName>`
+- `flags_listflags_<flagName>`
+
+### Blocked/WhiteList Info by ID
+- `blocked_size`
+- `blocked_players`
+- `blocked_contains_<player>`
+- `blocked_get_<index>`
+- `claimentry_whitelistsize`
+- `claimentry_whitelistedplayers`
+- `claimentry_blocklistsize`
+- `claimentry_blacklistedplayers`
+- `claimentry_isblockedforeveryone`
+- `claimentry_isblacklisted_<player>`
+- `claimentry_iswhitelisted_<player>`
+
+### Mob Spawns Info by ID
+- `nomobspawnstype_allowedspawnreasons`
+- `nomobspawnstype_disallowedentities`
+- `nomobspawnstype_disallowedentity_<entityType>`
+- `nomobspawnstype_allowedspawnreason_<reason>`
+
+### Other
+- `centerblocklist <index>`: Center block of a trusted claim by index.
+- `getclaimid <index>`: Claim ID of a trusted claim by index.

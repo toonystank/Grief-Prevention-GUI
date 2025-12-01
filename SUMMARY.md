@@ -8,6 +8,7 @@
 ***
 
 * [Getting Started](getting-started-1.md)
+* [Commands](commands.md)
 * [Placeholders](placeholders.md)
 
 ## GUI SYSTEM

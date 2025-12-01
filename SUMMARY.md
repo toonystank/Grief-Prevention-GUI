@@ -31,7 +31,3 @@
 * [Configuration Files](flag-system/images-and-media.md)
 * [GPFlags Integration](flag-system/interactive-blocks.md)
 * [Usage Notes and Troubleshooting](flag-system/openapi.md)
-
-***
-
-* [GUI System](gui-system-1.md)

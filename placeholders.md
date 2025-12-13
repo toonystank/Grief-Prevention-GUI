@@ -4,99 +4,133 @@ icon: spell-check
 
 # Placeholders
 
-Placeholders can be used with the prefix `%griefprevgui_<placeholder>%` or `%gpextension_<placeholder>%`.
+All placeholders can be used with either the **`%griefprevgui_...%`** or **`%gpextension_...%`** prefix.
 
-## General
+## 🟢 Global Player Data
+Statistics regarding the player viewing the placeholder.
 
-- `%griefprevgui_isclaimed [lookingat|x_y_z]%` - Returns true if the location is claimed.
-- `%griefprevgui_claimedby [lookingat|x_y_z]%` - Returns the owner of the claim at the location.
-- `%griefprevgui_isenabled [economy|list|teleport|warp]%` - Checks if a feature is enabled.
-- `%griefprevgui_warpsize%` - Returns the number of claims with warps.
-- `%griefprevgui_price [purchase|sell] <amount>%` - Calculates block price.
-- `%griefprevgui_prefix%` - Returns the plugin prefix.
-- `%griefprevgui_title%` - Returns the plugin title.
-- `%griefprevgui_flighttime%` - Returns the player's flight time.
-- `%griefprevgui_isholding createwand%` - Returns true if holding the claim creation tool.
-- `%griefprevgui_online [player|playeruuid|online]%` - Returns player name, UUID, or online count.
-- `%griefprevgui_areaprice <area>%` - Returns the price for a specific area size.
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_claimblocks%` | Total accrued claim blocks. |
+| `%griefprevgui_claimblocks_formatted%` | Total claim blocks formatted (e.g., 1.5k). |
+| `%griefprevgui_remainingblocks%` | Remaining available claim blocks. |
+| `%griefprevgui_remainingblocks_formatted%` | Remaining blocks formatted. |
+| `%griefprevgui_claimcount%` | Number of claims owned by the player. |
+| `%griefprevgui_trustcount%` | Number of claims the player is trusted in. |
+| `%griefprevgui_managercount%` | Number of claims the player has manager permissions in. |
+| `%griefprevgui_flighttime%` | Remaining flight time. |
+| `%griefprevgui_isholding_createwand%` | Returns `true` if holding the claim creation tool (Golden Shovel). |
 
-## Player Specific
+## 🌍 World & Economy
+General server and economy information.
 
-- `%griefprevgui_claimblocks [formatted]%` - Returns player's available claim blocks.
-- `%griefprevgui_remainingblocks [formatted]%` - Returns player's remaining claim blocks.
-- `%griefprevgui_claimcount%` - Returns number of claims owned.
-- `%griefprevgui_trustcount%` - Returns number of claims trusted in.
-- `%griefprevgui_managercount%` - Returns number of claims with manager permissions.
-- `%griefprevgui_otherplayer_uuid_<player>%` - Returns UUID of another player.
-- `%griefprevgui_otherplayer_displayname_<player>%` - Returns display name of another player.
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_online_online%` | Total count of players online. |
+| `%griefprevgui_online_player%` | Viewer's player name. |
+| `%griefprevgui_online_playeruuid%` | Viewer's UUID. |
+| `%griefprevgui_otherplayer_uuid_<name>%` | Get the UUID of a specific player name. |
+| `%griefprevgui_otherplayer_displayname_<name>%` | Get the display name of a specific player name. |
+| `%griefprevgui_warpsize%` | Total number of claims on the server that have a warp set. |
+| `%griefprevgui_price_purchase_<amount>%` | Calculate the cost to **buy** `<amount>` claim blocks. |
+| `%griefprevgui_price_sell_<amount>%` | Calculate the return to **sell** `<amount>` claim blocks. |
+| `%griefprevgui_areaprice_<area>%` | Calculate the cost for a claim of a specific area size. |
+| `%griefprevgui_isenabled_economy%` | Returns `true` if economy integration is enabled. |
+| `%griefprevgui_isenabled_teleport%` | Returns `true` if teleportation features are enabled. |
+| `%griefprevgui_isenabled_warp%` | Returns `true` if warp features are enabled. |
 
-## Standing In Claim
+## 🔍 Location Checks
+Check if specific locations are claimed.
 
-Placeholders relative to the claim the player is currently standing in.
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_isclaimed_lookingat%` | `true` if the block the player is looking at is claimed. |
+| `%griefprevgui_isclaimed_<x>_<y>_<z>%` | `true` if the specific coordinates are claimed. |
+| `%griefprevgui_claimedby_lookingat%` | Name of the owner of the claim being looked at. |
+| `%griefprevgui_claimedby_<x>_<y>_<z>%` | Name of the owner at the specific coordinates. |
 
-- `%griefprevgui_standing_id%` - Claim ID.
-- `%griefprevgui_standing_owner%` - Claim Owner.
-- `%griefprevgui_standing_size%` - Claim Area.
-- `%griefprevgui_standing_permission%` - Player's permission level.
-- `%griefprevgui_standing_flag_list%` - List of active flags.
-- `%griefprevgui_standing_flag_isactive_<flagName>%` - Check if a flag is active.
+## 📍 "Standing In" Context
+These placeholders return data strictly about the claim the player is **currently standing inside**.
 
-## By Claim ID
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_standing_id%` | The numerical ID of the claim. |
+| `%griefprevgui_standing_owner%` | The name of the claim owner. |
+| `%griefprevgui_standing_size%` | The total area size (blocks). |
+| `%griefprevgui_standing_permission%` | The viewer's permission level in this claim. |
+| `%griefprevgui_standing_flag_list%` | A list of all active flags in this claim. |
+| `%griefprevgui_standing_flag_isactive_<flag>%` | `true` if the specific `<flag>` is active here. |
 
-Prefix: `%griefprevgui_getbyid_<subcommand>_<claimID>%` (or `here` for current location)
+## 🆔 Specific Claim Data (Get By ID)
+Retrieve information about any claim by its ID.
+> **Note:** You can replace `<ID>` with **`here`** to automatically target the claim the player is standing in.
 
-- `isinvited`: Is the player invited?
-- `invitor`: Name of the invitor.
-- `size`: Claim area.
-- `isexist`: Does the claim exist?
-- `expiretime`: Expiration date.
-- `issubdiv`: Is it a subdivision?
-- `subsize`: Number of subdivisions.
-- `owner`: Claim owner name.
-- `location`: Formatted center location.
-- `trustsize`: Number of trusted players.
-- `istrusted`: Is the player trusted?
-- `trust <index>`: Name of trusted player at index.
-- `trustuuid <index>`: UUID of trusted player at index.
-- `permission <UUID>`: Permission level of specific UUID.
-- `permissionname <player>`: Permission level of specific player.
-- `isbuild`: Does player have build trust?
-- `editaccess`: Does player have edit access?
-- `canremovepermission <UUID>`: Can player remove permission of UUID?
-- `biome`: Center biome.
-- `teleportlocation`: Teleport location.
-- `centerblock`: Center block type.
-- `claimname`: Claim name.
-- `claimicon`: Claim icon type.
-- `isin`: Is player inside?
-- `warplocation`: Warp location.
-- `trustlist <separator>`: Formatted trust list.
+### Basic Information
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_owner_<ID>%` | Name of the claim owner. |
+| `%griefprevgui_getbyid_claimname_<ID>%` | The custom name of the claim. |
+| `%griefprevgui_getbyid_claimdescription_<ID>%` | The description of the claim. |
+| `%griefprevgui_getbyid_claimicon_<ID>%` | The icon material of the claim. |
+| `%griefprevgui_getbyid_location_<ID>%` | Formatted center location. |
+| `%griefprevgui_getbyid_size_<ID>%` | Total area size. |
+| `%griefprevgui_getbyid_biome_<ID>%` | The biome at the center of the claim. |
+| `%griefprevgui_getbyid_expiretime_<ID>%` | Date/Time when the claim will expire. |
+| `%griefprevgui_getbyid_isexist_<ID>%` | `true` if a claim with this ID exists. |
+| `%griefprevgui_getbyid_isin_<ID>%` | `true` if the viewer is currently inside this claim. |
+| `%griefprevgui_getbyid_warplocation_<ID>%` | The formatted location of the claim's warp. |
+| `%griefprevgui_getbyid_issubdiv_<ID>%` | `true` if this claim is a subdivision. |
+| `%griefprevgui_getbyid_subsize_<ID>%` | The number of subdivisions inside this claim. |
 
-### Flag Info by ID
-- `flags_isactive_<flagName>`
-- `flags_isactiveformatted_<flagName>`
-- `flags_parma_<flagName>`
-- `flags_listflags_<flagName>`
+### Permissions & Trust
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_istrusted_<ID>%` | `true` if the viewer is trusted in this claim. |
+| `%griefprevgui_getbyid_isbuild_<ID>%` | `true` if the viewer has build permission. |
+| `%griefprevgui_getbyid_trustsize_<ID>%` | Total number of trusted players. |
+| `%griefprevgui_getbyid_trustlist_<type>_<ID>%` | Formatted list of trusted players.<br>Types: `all`, `build`, `container`, `access`, `manager`. |
+| `%griefprevgui_getbyid_trust_<ID>_<index>%` | Get the **Name** of the trusted player at `<index>`. |
+| `%griefprevgui_getbyid_trustuuid_<ID>_<index>%` | Get the **UUID** of the trusted player at `<index>`. |
+| `%griefprevgui_getbyid_permission_<ID>_<UUID>%` | Get the permission level of a specific UUID. |
+| `%griefprevgui_getbyid_permissionname_<ID>_<Name>%` | Get the permission level of a specific Name. |
+| `%griefprevgui_getbyid_editaccess_<ID>_<UUID>%` | `true` if the viewer is allowed to edit the permissions of `<UUID>`. |
+| `%griefprevgui_getbyid_canremovepermission_<ID>_<UUID>%` | `true` if the viewer is allowed to remove `<UUID>` from the claim. |
 
-### Blocked/WhiteList Info by ID
-- `blocked_size`
-- `blocked_players`
-- `blocked_contains_<player>`
-- `blocked_get_<index>`
-- `claimentry_whitelistsize`
-- `claimentry_whitelistedplayers`
-- `claimentry_blocklistsize`
-- `claimentry_blacklistedplayers`
-- `claimentry_isblockedforeveryone`
-- `claimentry_isblacklisted_<player>`
-- `claimentry_iswhitelisted_<player>`
+### Flags
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_flags_isactive_<flag>_<ID>%` | `true`/`false` if the flag is active. |
+| `%griefprevgui_getbyid_flags_isactiveformatted_<flag>_<ID>%` | "Enabled"/"Disabled" (formatted). |
+| `%griefprevgui_getbyid_flags_parma_<flag>_<ID>%` | Returns the flag's specific value parameter. |
+| `%griefprevgui_getbyid_flags_listflags_<ID>%` | Returns a list of all active flags. |
 
-### Mob Spawns Info by ID
-- `nomobspawnstype_allowedspawnreasons`
-- `nomobspawnstype_disallowedentities`
-- `nomobspawnstype_disallowedentity_<entityType>`
-- `nomobspawnstype_allowedspawnreason_<reason>`
+### Bans & Entry Control
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_blocked_size_<ID>%` | Number of blocked players. |
+| `%griefprevgui_getbyid_blocked_players_<ID>%` | List of blocked player names. |
+| `%griefprevgui_getbyid_blocked_contains_<ID>_<Name>%` | `true` if the specific player is blocked. |
+| `%griefprevgui_getbyid_blocked_get_<ID>_<index>%` | Get the blocked player name at `<index>`. |
+| `%griefprevgui_getbyid_claimentry_<ID>_whitelistsize%` | Number of whitelisted players (NoEnter). |
+| `%griefprevgui_getbyid_claimentry_<ID>_whitelistedplayers%` | List of whitelisted players. |
+| `%griefprevgui_getbyid_claimentry_<ID>_iswhitelisted_<Name>%` | `true` if the specific player is whitelisted. |
+| `%griefprevgui_getbyid_claimentry_<ID>_blocklistsize%` | Number of blacklisted players (NoEnter). |
+| `%griefprevgui_getbyid_claimentry_<ID>_blacklistedplayers%` | List of blacklisted players. |
+| `%griefprevgui_getbyid_claimentry_<ID>_isblacklisted_<Name>%` | `true` if the specific player is blacklisted. |
+| `%griefprevgui_getbyid_claimentry_<ID>_isblockedforeveryone%` | `true` if the claim is closed to everyone. |
 
-### Other
-- `centerblocklist <index>`: Center block of a trusted claim by index.
-- `getclaimid <index>`: Claim ID of a trusted claim by index.
+### Mob Spawning
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_nomobspawnstype_allowedspawnreasons_<ID>%` | List of allowed spawn reasons. |
+| `%griefprevgui_getbyid_nomobspawnstype_disallowedentities_<ID>%` | List of disallowed entity types. |
+| `%griefprevgui_getbyid_nomobspawnstype_disallowedentity_<ID>_<Entity>%` | `true` if the entity type is disallowed. |
+| `%griefprevgui_getbyid_nomobspawnstype_allowedspawnreason_<ID>_<Reason>%` | `true` if the spawn reason is allowed. |
+
+### Utility
+| Placeholder | Description |
+| :--- | :--- |
+| `%griefprevgui_getbyid_isinvited_<ID>%` | `true` if the viewer has a pending invite to this claim. |
+| `%griefprevgui_getbyid_invitor_<ID>%` | Name of the person who invited the viewer. |
+| `%griefprevgui_getbyid_centerblocklist_<Index>%` | Returns the center block of the claim at the specific index in the viewer's trust list. |
+| `%griefprevgui_getclaimid_<Index>%` | Returns the Claim ID of the Nth claim in the viewer's trust list. |

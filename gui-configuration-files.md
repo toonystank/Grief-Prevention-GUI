@@ -4,238 +4,322 @@ icon: wrench
 
 # GUI Configuration Files
 
-Each GUI, whether default or custom, is defined in a YAML file with two main sections: `data` and `items`. Below is an overview of these sections and their properties.
+Each GUI is defined in a YAML file with two main sections: **`data`** (overall properties) and **`items`** (interactive elements). This page is the complete reference for every configuration option.
 
-### data Section
+---
 
-The `data` section defines the overall properties of the GUI, such as its title, size, and theme.
+## `data` Section
 
-* **Key Fields**:
-  * `menu_title`: The title displayed at the top of the GUI, supporting placeholders (e.g., `&7%gpextension_title% (&2/ClaimIcon&7)`).
-  * `args`: A list of arguments required by the GUI (e.g., `id`, `itemname` for claim ID or item selection).
-  * `rows`: The number of rows in the GUI (e.g., `6` for a 54-slot inventory).
-  * `theme`: Specifies the theme to apply (e.g., `default`, `clean_4`). The plugin loads `<theme_name>_EN.yml` from the theme folder (e.g., `clean_4_EN.yml`).
-  * `version`: A developer-only field specifying the configuration version (e.g., `1.0`). Do not edit, as it may break the plugin.
-  * `gui_type`: A developer-only field indicating the type of GUI (e.g., `ICON_SELECTOR`). For custom GUIs, it must match the name in `gui.custom_guis`. Do not edit for default GUIs.
-*   **Example** (from `ClaimUpgradeNoEnter_EN.yml`):
+The `data` section defines the overall properties of the GUI.
 
-    ```yaml
-    data:
-      menu_title: "%griefprevgui_title% &7(&2No Enter&7)"
-      version: "1.1"
-      args:
-        - claimid
-      rows: 4
-      theme: clean_4
-      gui_type: CLAIM_UPGRADE_NO_ENTER
-    ```
-* **Notes**:
-  * Admins should only modify `menu_title`, `args`, `rows`, and `theme` as needed.
-  * For custom GUIs, ensure `gui_type` matches the `custom_guis` entry in `config.yml`.
-  * Editing `version` or `gui_type` for default GUIs can cause compatibility issues.
+```yaml
+data:
+  menu_title: '%griefprevgui_title% &7(&2/claim&7)'
+  version: '1.2'
+  args:
+    - claimid
+  rows: 6
+  gui_type: CLAIM_INFO
+  theme: default
+```
 
-### items Section
+| Field | Editable | Description |
+|---|---|---|
+| `menu_title` | ✅ | Title displayed at the top of the GUI inventory. Supports color codes (`&7`), placeholders (`%griefprevgui_title%`), and argument replacements (`{claimid}`). |
+| `args` | ✅ | A list of argument names the GUI expects. Values are passed at runtime from the command that opens the GUI. See [GUI Arguments](#gui-arguments-system) below. |
+| `rows` | ✅ | Number of inventory rows (1–6). A 6-row GUI has 54 slots (0–53). |
+| `theme` | ✅ | Name of the theme to apply (e.g., `default`, `clean`, `nature`, `clean_4`). Loads `<theme_name>_EN.yml` from the theme folder. |
+| `version` | ❌ | Internal version tracking. **Do not edit** — may break auto-updates. |
+| `gui_type` | ❌ | Internal GUI type identifier. For custom GUIs this must match the name in `config.yml`'s `custom_guis` list. **Do not edit** for default GUIs. |
 
-The `items` section defines the interactive elements (buttons, icons, etc.) displayed in the GUI, structured similarly to `FlagOptions.yml`. Each item is configured under a unique section name (e.g., `teleport`, `plains`) and supports properties to control its appearance and behavior. Multi-page GUIs include `Previous` and `Next` sections for navigation.
+---
 
-* **Key Fields**:
-  * `material`: The Minecraft item representing the element (e.g., `ENDER_PEARL`, `GRASS_BLOCK`).
-  * `display_name`: The name shown in the GUI, supporting color codes and placeholders (e.g., `&7Plains`).
-  * `lore`: A list of text lines displayed when hovering, often including descriptions and placeholders (e.g., `&8• &7Current: &f%gpextension_getbyid_flags_parma_ChangeBiome_{claimid}%`).
-  * `slot`: The specific slot where the item appears, as a single integer (e.g., `10`, `31`).
-  * `slots`: A list of slots where the item appears (e.g., `[10, 11, 12]`), used instead of `slot`.
-  * `amount`: The stack size of the item (defaults to `1` if not specified or invalid).
-  * `glow`: If `true`, the item appears enchanted (e.g., `true` for `add`).
-  * `model_data`: Custom model data for resource pack textures (optional, e.g., `0`).
-  * `left_click_commands`: Commands executed on left-click (e.g., `[player] claim tp {claimid}`).
-  * `right_click_commands`: Commands executed on right-click (e.g., `[player] gpguiflags set {claimid} ChangeBiome PLAINS`).
-  * `click_commands`: Commands executed for both left and right clicks (used instead of separate left/right commands).
-  * `priority`: Determines the rendering order of items (e.g., `1` for `disabled`). Items with lower priority override theme items (priority `5`).
-  * `view_requirement`: Conditions for item visibility (e.g., checking if a feature is enabled or if the player has permissions).
-* **Navigation Controls**:
-  * Multi-page GUIs include `Previous` and `Next` sections to navigate between pages, typically placed in slots `47` and `51`, respectively.
-  *   Example configuration:
+## `items` Section
 
-      ```yaml
-      Previous:
-        material: ARROW
-        model_data: 0
-        display_name: "&cPrevious Page &7[&a<page>&7/&2<max_page>&7]"
-        lore:
-          - "&7Go to the previous page"
-        slot: 47
-      Next:
-        material: ARROW
-        model_data: 0
-        display_name: "&aNext Page &7[&a<page>&7/&2<max_page>&7]"
-        lore:
-          - "&7Go to the next page"
-        slot: 51
-      ```
-* **Special Sections for Custom GUIs**:
-  * Some custom GUIs (e.g., `ICON_SELECTOR`, `NO_MOB_SPAWNS_TYPE`) require a specific section in `items` matching their `gui_type` (e.g., `ICON_SELECTOR` for dynamic icon population).
-  * User-defined custom GUIs (e.g., `ClaimUpgradeBiomeSelector`) typically use predefined items and may not require a dynamic section.
-*   **Example Configurations**:
+The `items` section defines every button, icon, and decoration in the GUI. Each item is a named sub-section under `items`.
 
-    **IconSelector.yml** (Default Custom GUI with dynamic content and navigation):
+### Item Properties Reference
 
-    ```yaml
-    data:
-      menu_title: "&7%gpextension_title% (&2/ClaimIcon&7)"
-      args:
-        - id
-        - itemname
-      version: "1.0"
-      rows: 6
-      theme: default
-      gui_type: ICON_SELECTOR
-    items:
-      mode_selector_category:
-        material: CREEPER_BANNER_PATTERN
-        model_data: 0
-        slot: 0
-        display_name: "&7Item Category &7(&a<mode_category>&7)"
-        lore:
-          - ""
-          - "&2Description:"
-          - "   &7Change the sorting of materials"
-          - ""
-          - "   &7Current: &a<mode_category>"
-          - ""
-          - "&7Categories:"
-          - ""
-          - "   &8• &7<selected_block>"
-          - "   &8• &7<selected_edible>"
-          - "   &8• &7<selected_record>"
-          - "   &8• &7<selected_allmaterial>"
-          - ""
-          - "&7Click to change the Item Category."
-      add:
-        material: PAPER
-        glow: true
-        model_data: 0
-        priority: 1
-        display_name: "&7Change by name"
-        lore:
-          - ""
-          - "&2Description"
-          - ""
-          - "    &8• &7Status: &f%griefprevgui_getbyid_flags_isactive_ClaimIcon_{id}%"
-          - ""
-        slot: 8
-        click_commands:
-          - "[sound] UI_BUTTON_CLICK"
-          - "[player] gpguiflags set {id} ClaimIcon <anvilreply>"
-      goback:
-        material: OAK_DOOR
-        model_data: 0
-        display_name: "&7⟰ &aGo Back"
-        left_click_commands:
-          - "[sound] BLOCK_WOODEN_DOOR_OPEN"
-          - "[player] claim"
-        slot: 45
-      Previous:
-        material: ARROW
-        model_data: 0
-        display_name: "&cPrevious Page &7[&a<page>&7/&2<max_page>&7]"
-        lore:
-          - "&7Go to the previous page"
-        slot: 47
-      Next:
-        material: ARROW
-        model_data: 0
-        display_name: "&aNext Page &7[&a<page>&7/&2<max_page>&7]"
-        lore:
-          - "&7Go to the next page"
-        slot: 51
-      filler:
-        material: LIGHT_BLUE_STAINED_GLASS_PANE
-        model_data: 0
-        display_name: " &r "
-      ICON_SELECTOR:
-        display_name: "<itemname>"
-        lore:
-          - ""
-          - "&2Description:"
-          - ""
-          - "    &8• &7Name: &f<itemname>"
-          - "    &8• &7Category: &f<itemcategory>"
-          - ""
-          - "&a&l| &2Click to select"
-        click_commands:
-          - "[player] gpguiflags set {id} ClaimIcon {itemname}"
-          - "[close]"
-          - "[sound] UI_BUTTON_CLICK"
-    ```
+```yaml
+items:
+  teleport:
+    material: ENDER_PEARL
+    display_name: '&7Teleport &7(&aView&7)'
+    lore:
+      - ''
+      - '&2Description'
+      - '   &7Teleport to this claim'
+      - ''
+      - '    &8• &7Location: &f%griefprevgui_getbyid_location_{claimid}%'
+      - ''
+      - '&a&l| &2Left Click to Teleport'
+      - '&a&l| &2Right Click to Change location'
+    slot: 31
+    amount: 1
+    glow: true
+    model_data: 0
+    priority: 1
+    bedrock_supported: true
+    left_click_commands:
+      - '[player] claim tp {claimid}'
+      - '[sound] UI_BUTTON_CLICK'
+    right_click_commands:
+      - '[player] claim tp {claimid} set'
+      - '[sound] UI_BUTTON_CLICK'
+      - '[close]'
+      - '[player] claiminfo {claimid}<delay=20>'
+```
 
-    **ClaimUpgradeBiomeSelector\_EN.yml** (User-Defined Custom GUI with predefined items):
+| Property | Type | Default | Description |
+|---|---|---|---|
+| `material` | String | `STONE` | The Minecraft item material. Also supports [special material types](#special-material-types). Can contain argument placeholders (e.g., `{material_arg}`). |
+| `display_name` | String | — | Item name in the GUI. Supports `&` color codes, PlaceholderAPI placeholders, and `{arg}` replacements. |
+| `lore` | List | `[]` | Hover text lines. Same formatting support as `display_name`. |
+| `slot` | String/Int | — | Where to place the item. Accepts a single integer (`10`), or a range (`10-15` which expands to slots 10, 11, 12, 13, 14, 15). |
+| `slots` | List | `[]` | Alternative to `slot` — a list of slot integers (e.g., `[10, 11, 12]`). |
+| `amount` | Int | `1` | Item stack size. |
+| `glow` | Boolean | `false` | If `true`, the item has an enchantment glow effect. |
+| `model_data` | Int | `0` | Custom model data for resource pack textures. |
+| `priority` | Int | auto | Determines which item shows when multiple items target the same slot. **Lower number = higher priority**. Theme items default to `5`; GUI items that don't specify a priority get the lowest available number starting from `1`. |
+| `bedrock_supported` | Boolean | `true` | Whether this item renders for Bedrock players (via Geyser). Theme items default to `false`. |
 
-    ```yaml
-    data:
-      menu_title: "%gpextension_title% &7(&2Biome Selector&7)"
-      version: "1.0"
-      args:
-        - claimid
-      rows: 6
-      theme: default
-      gui_type: ClaimUpgradeBiomeSelector
-    items:
-      goback:
-        material: OAK_DOOR
-        priority: 2
-        display_name: "&7⟰ &aGo Back"
-        click_commands:
-          - "[sound] BLOCK_WOODEN_DOOR_OPEN"
-          - "[player] claim"
-        slot: 45
-      disabled:
-        material: BARRIER
-        priority: 1
-        display_name: "&cReset Biome"
-        lore:
-          - ""
-          - "    &8• &7Current: &f%griefprevgui_getbyid_flags_parma_ChangeBiome_{claimid}%"
-          - "&a&l| &2Click to reset biome to default."
-        slot: 53
-        click_commands:
-          - "[player] gpguiflags unset {claimid} ChangeBiome true"
-      plains:
-        material: GRASS_BLOCK
-        priority: 2
-        display_name: "&7Plains"
-        lore:
-          - ""
-          - "&2Biome Description:"
-          - "   &7A peaceful grassy landscape filled with flowers and animals."
-          - ""
-          - "    &8• &7Current: &f%griefprevgui_getbyid_flags_parma_ChangeBiome_{claimid}%"
-          - ""
-          - "&a&l| &2Click to set this biome."
-        click_commands:
-          - "[player] gpguiflags set {claimid} ChangeBiome PLAINS"
-          - "[sound] UI_BUTTON_CLICK"
-        slot: 10
-      forest:
-        material: OAK_LOG
-        priority: 2
-        display_name: "&7Forest"
-        lore:
-          - ""
-          - "&2Biome Description:"
-          - "   &7A dense forest with tall oak and birch trees."
-          - ""
-          - "    &8• &7Current: &f%griefprevgui_getbyid_flags_parma_ChangeBiome_{claimid}%"
-          - ""
-          - "&a&l| &2Click to set this biome."
-        click_commands:
-          - "[player] gpguiflags set {claimid} ChangeBiome FOREST"
-          - "[sound] UI_BUTTON_CLICK"
-        slot: 11
-      # Additional biome items omitted for brevity, following the same structure
-    ```
-* **Notes**:
-  * The `ICON_SELECTOR` section in `IconSelector.yml` is required for dynamic icon population.
-  * `ClaimUpgradeBiomeSelector_EN.yml` uses predefined items for biomes and does not require a dynamic section.
-  * Navigation controls (`Previous` and `Next`) are defined as specific sections in multi-page GUIs, typically in slots `47` and `51`.
-  * Commands use placeholders (e.g., `{claimid}`, `<anvilreply>`) and special actions (e.g., `[close]`, `[sound]`).
-  * Theme items (priority `5`) are overridden by GUI items with lower priority (e.g., `1`, `2`).&#x20;
+---
+
+## Click Commands
+
+Commands are executed when a player clicks an item. There are three ways to define them:
+
+| Field | When it runs |
+|---|---|
+| `left_click_commands` | Left-click only |
+| `right_click_commands` | Right-click only |
+| `click_commands` | **Both** left and right click (shorthand — if present, it is used for both) |
+
+Each entry in the list must start with a **command type prefix**.
+
+### Command Type Prefixes
+
+| Prefix | Description | Example |
+|---|---|---|
+| `[player]` | Runs the command **as the player** | `[player] claim tp {claimid}` |
+| `[console]` | Runs the command **as the console** | `[console] eco give %player_name% 100` |
+| `[sound]` | Plays a Minecraft sound effect | `[sound] UI_BUTTON_CLICK` |
+| `[close]` | Closes the GUI | `[close]` |
+| `[reopen]` | Reopens/refreshes the current GUI | `[reopen]` |
+| `[message]` | Sends a formatted chat message to the player | `[message] &aYou clicked this item!` |
+
+### Command Modifiers
+
+You can append inline modifiers to any command line:
+
+| Modifier | Description | Example |
+|---|---|---|
+| `<delay=N>` | Delays execution by `N` ticks (20 ticks = 1 second) | `[player] claiminfo {id}<delay=20>` |
+| `<pitch=N>` | Sets the pitch of a `[sound]` command | `[sound] ENTITY_EXPERIENCE_ORB_PICKUP<pitch=2>` |
+
+### Anvil Input Placeholders
+
+These special placeholders open an anvil GUI for the player to type input before the command executes:
+
+| Placeholder | Description | Example |
+|---|---|---|
+| `<anvilreply>` | Opens an anvil for free-text input. The typed text replaces this placeholder. | `[player] gpguiflags set {id} ClaimIcon <anvilreply>` |
+| `<anvilplayer>` | Opens an anvil for player name input. | `[player] trust {claimid} <anvilplayer>` |
+
+### Full Click Command Example
+
+```yaml
+teleport:
+  left_click_commands:
+    - '[sound] UI_BUTTON_CLICK'
+    - '[player] claim tp {claimid}'
+  right_click_commands:
+    - '[sound] UI_BUTTON_CLICK'
+    - '[player] claim tp {claimid} set'
+    - '[close]'
+    - '[player] claiminfo {claimid}<delay=20>'
+```
+
+In this example:
+- **Left-click** plays a sound, then teleports the player to the claim.
+- **Right-click** plays a sound, sets the teleport location, closes the GUI, then re-opens the claim info after a 1-second delay.
+
+---
+
+## GUI Arguments System
+
+GUI arguments allow you to pass dynamic values into a GUI and use them throughout all text fields.
+
+### How It Works
+
+1. **Declare** arguments in the `data` section:
+   ```yaml
+   data:
+     args:
+       - claimid
+       - itemname
+   ```
+
+2. **Pass** values when the GUI opens. The plugin maps values by **position** in the args list:
+   - Argument 0 → `claimid`
+   - Argument 1 → `itemname`
+
+   For example, the command `/claiminfo 123` passes `123` as argument 0 (`claimid`).
+
+3. **Use** `{argName}` anywhere in text fields — `display_name`, `lore`, commands, even `material`:
+   ```yaml
+   display_name: '&7Claim &a{claimid}'
+   lore:
+     - '&8• &7ID: &f{claimid}'
+   click_commands:
+     - '[player] claim tp {claimid}'
+   ```
+
+4. At render time, `{claimid}` is replaced with the actual value (e.g., `123`).
+
+> **Tip:** Arguments can also be used inside `material` fields. For example, if `args: [material_type]`, you can write `material: '{material_type}'` and it will resolve to whatever value was passed.
+
+---
+
+## View Requirements (Conditional Visibility)
+
+Items can be conditionally shown or hidden based on requirements. This is powerful for showing different items to different players (e.g., owners vs. trusted players).
+
+### Structure
+
+```yaml
+view_requirement:
+  requirements:
+    my_requirement_name:
+      type: string equals
+      input: '%griefprevgui_isenabled_teleport%'
+      output: 'true'
+```
+
+Multiple requirements under the same item act as **AND** conditions — all must pass for the item to show.
+
+### Requirement Types
+
+| Type | Description |
+|---|---|
+| `string equals` | `input` must exactly match `output` |
+| `string contains` | `input` must contain `output` as a substring |
+| `string equals ignorecase` | Case-insensitive version of `string equals` |
+| `has permission` | Player must have the specified permission node |
+| `has money` | Player must have at least the specified amount of money (economy) |
+
+### Inverting Requirements
+
+Prefix any type with `!` to **invert** the check:
+
+```yaml
+view_requirement:
+  requirements:
+    not_a_subdiv:
+      type: '!string equals'
+      input: '%griefprevgui_getbyid_issubdiv_{claimid}%'
+      output: 'true'
+```
+
+This item will only show if the claim is **not** a subdivision.
+
+### Priority + Requirements: Conditional Item Swapping
+
+When multiple items target the **same slot** with different priorities and requirements, the system picks the first item (lowest priority number) whose requirements pass.
+
+**Example:** Show "Delete Claim" to owners, but "Leave Claim" to everyone else, both on slot 53:
+
+```yaml
+claim_delete:
+  material: RED_CONCRETE
+  priority: 1
+  slot: 53
+  display_name: '&7Claim Delete'
+  view_requirement:
+    requirements:
+      is_owner:
+        type: string equals ignorecase
+        input: '%griefprevgui_getbyid_owner_{claimid}%'
+        output: '%player_name%'
+  click_commands:
+    - '[player] unclaim {claimid}'
+
+claim_leave:
+  material: RED_CONCRETE
+  priority: 2
+  slot: 53
+  display_name: '&7Leave Claim'
+  click_commands:
+    - '[player] leaveclaim {claimid}'
+```
+
+- Priority `1` item (`claim_delete`) is checked first — if the player is the owner, it shows.
+- If not, priority `2` item (`claim_leave`) shows instead.
+
+---
+
+## Navigation Controls (Pagination)
+
+Multi-page GUIs automatically support pagination. Items with the section names **`Previous`** and **`Next`** are automatically recognized as navigation controls — no extra configuration needed.
+
+```yaml
+Previous:
+  material: ARROW
+  display_name: '&cPrevious Page &7[&a<page>&7/&2<max_page>&7]'
+  lore:
+    - '&7Go to the previous page'
+  slot: 47
+
+Next:
+  material: ARROW
+  display_name: '&aNext Page &7[&a<page>&7/&2<max_page>&7]'
+  lore:
+    - '&7Go to the next page'
+  slot: 51
+```
+
+### Pagination Placeholders
+
+| Placeholder | Description |
+|---|---|
+| `<page>` | Current page number |
+| `<max_page>` | Total number of pages |
+
+---
+
+## Special Material Types
+
+Beyond standard Minecraft material names, the `material` field supports two special prefixes:
+
+| Prefix | Description | Example |
+|---|---|---|
+| `basehead-` | Custom skull using a Base64 texture string | `basehead-eyJ0ZXh0dXJlcyI6ey...` |
+| `playerhead-` | Player head skull. Supports placeholders. | `playerhead-%player_name%` |
+
+---
+
+## Dynamic Placeholders
+
+In addition to `{arg}` replacements and PlaceholderAPI, these built-in placeholders are available in specific contexts:
+
+| Placeholder | Context | Description |
+|---|---|---|
+| `<page>` | Navigation items | Current page number |
+| `<max_page>` | Navigation items | Total page count |
+| `<current_blocks>` | Claim block GUIs | Player's current block count |
+| `<claimname>` | Claim-context GUIs | Name of the claim |
+| `<id>` | Claim-context GUIs | Claim ID |
+| `<description>` | Claim-context GUIs | Claim description (from the ClaimDescription flag). If no description is set, the lore line is hidden. |
+| `<expiretime>` | Claim-context GUIs | Expiration countdown |
+| `<itemname>` | Icon Selector GUI | Material name of the current item |
+| `<itemcategory>` | Icon Selector GUI | Category of the current material |
+| `<EorS>` | Mob type GUIs | Entity or spawn reason name |
+| `<mode_permission>` | Sort selectors | Current permission filter text |
+| `<mode_parameter>` | Sort selectors | Current distance sort text |
+| `<mode_flag>` | Sort selectors | Current flag filter name |
+| `<mode_category>` | Sort selectors | Current category filter text |
+| `<mode_online_status>` | Sort selectors | Current online status filter |
+| `<mode_type>` | Sort selectors | Current region type filter |
+| `<selected_*>` | Sort selectors | Highlights the currently active sort option with green + underline formatting |
+
+> All standard [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI) placeholders and [GriefPrev-GUI placeholders](placeholders.md) (e.g., `%griefprevgui_getbyid_location_{claimid}%`) also work in any text field.

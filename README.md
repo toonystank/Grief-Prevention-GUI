@@ -15,6 +15,8 @@ coverHeight: 700
 
 ![Banner](https://api.mcbanners.com/banner/saved/EYRfzXetZfvRpZ.png)
 
+{% embed url="https://grief-prevention-gui-addon-stats.vercel.app/api/banner" %}
+
 ## Welcome
 
 Welcome to the official documentation for the **Grief Prevention GUI Addon**—a powerful extension designed to enhance the GriefPrevention plugin with an intuitive graphical user interface (GUI) and advanced claim management features.​

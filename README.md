@@ -1,8 +1,8 @@
 ---
 icon: mushroom
-cover: .gitbook/assets/GriefPrevGUI-social media.png
+cover: .gitbook/assets/banner2026.png
 coverY: 0
-coverHeight: 536
+coverHeight: 700
 ---
 
 # Welcome
